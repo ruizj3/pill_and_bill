@@ -1,14 +1,17 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {connect} from 'react-redux'
+import PatientsContainer from './containers/PatientsContainer'
 
-function App() {
-  const test = 'Pill and Bill';
-  return (
-    <div className="App">
-      <h1>{test}</h1>
-    </div>
-  );
+class App extends React.Component {
+
+  render() {
+    return (
+      <div className="App">
+        <PatientsContainer/>
+      </div>
+    );
+  }
 }
+
 
 export default App;

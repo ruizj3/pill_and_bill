@@ -13,8 +13,9 @@ const Patient = (props) => {
 
     <div>
       <h2>
-        {patient ? patient.name : null}
+        Patient Name: {patient ? patient.attributes.username : null} - {patient ? patient.attributes.dob : null}
       </h2>
+      <p>Doctor Name: {patient ? patient.attributes.doctor.username : null}</p>
 
     </div>
   )

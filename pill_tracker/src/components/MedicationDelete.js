@@ -8,18 +8,12 @@ class MedicationDelete extends React.Component {
     id: '',
   }
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-
-  }
-
   handleSubmit = (event) => {
     event.preventDefault()
     const medication = {...this.state, id: this.props.medication.id}
     this.props.deleteMedication(medication.id)
     window.location.reload(false)
+    window.location.replace(`http://localhost:3001/medications`)
 
   }
 
@@ -27,7 +21,7 @@ class MedicationDelete extends React.Component {
 
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="submit"/>
+        <button type="submit">Delete</button>
       </form>
     )
   }

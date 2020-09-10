@@ -3,6 +3,7 @@ import {Route, Link} from 'react-router-dom'
 import Patient from './Patient'
 
 const Patients = props => {
+
   return (
     <div>
       {props.patients.map(patient =>

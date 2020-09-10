@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {addTakedosage} from '../actions/addTakedosage'
-import { Redirect } from 'react-router-dom'
+
 
 
 class TakedosageInput extends React.Component {

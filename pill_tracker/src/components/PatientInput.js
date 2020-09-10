@@ -26,6 +26,8 @@ class PatientInput extends React.Component {
       password:'',
       doctor_id:''
     })
+    window.location.reload(false)
+    window.location.replace(`http://localhost:3001/patients`)
   }
 
   render() {

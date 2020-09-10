@@ -11,7 +11,8 @@ class PatientsContainer extends React.Component {
 
 
   componentDidMount() {
-    this.props.fetchPatients()
+    Promise.all([
+    this.props.fetchPatients()])
   }
 
 
@@ -34,7 +35,7 @@ class PatientsContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    patients: state.patients
+    patients: state.patientReducer.patients
   }
 }
 

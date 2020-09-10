@@ -4,6 +4,7 @@ import PatientsContainer from './containers/PatientsContainer'
 import PrescriptionsContainer from './containers/PrescriptionsContainer'
 import TakedosagesContainer from './containers/TakedosagesContainer'
 import MedicationsContainer from './containers/MedicationsContainer'
+import Home from './components/Home'
 
 class App extends React.Component {
 
@@ -12,7 +13,7 @@ class App extends React.Component {
     return (
 
       <div className="App">
-
+        <Home/>
         <PatientsContainer/>
         <PrescriptionsContainer/>
         <TakedosagesContainer/>

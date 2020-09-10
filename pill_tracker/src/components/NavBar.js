@@ -5,7 +5,7 @@ const NavBar = (props) => {
 
   return (
     <div>
-      <Link to='/' style={{paddingRight: '10px'}}>Home  </Link>
+      <Link to='/home' style={{paddingRight: '10px'}}>Home  </Link>
       <Link to='/patients' style={{paddingRight: '10px'}}>Patients  </Link>
       <Link to='/patients/new' style={{paddingRight: '10px'}}> Add Patient</Link>
       <Link to='/prescriptions' style={{paddingRight: '10px'}}>Prescriptions  </Link>

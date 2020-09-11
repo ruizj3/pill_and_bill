@@ -1,6 +1,6 @@
 # pill_and_bill
-Basic Medication Tracker backend data handling for Doctors monitoring patient prescriptions.
+Basic Medication Tracker frontend data handling and viewing for Doctors monitoring patient prescriptions.
 
-Run `bundle install` and `rail s` to start.
+Run `npm install` and `npm start` to start.
 
-This should go to `http://localhost:3000` as the host.
+With backend already up and running, this should go to `http://localhost:3001` upon being prompted and selecting Y for another port.

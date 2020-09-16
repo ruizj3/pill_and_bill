@@ -4,11 +4,13 @@ import PatientsContainer from './containers/PatientsContainer'
 import PrescriptionsContainer from './containers/PrescriptionsContainer'
 import TakedosagesContainer from './containers/TakedosagesContainer'
 import MedicationsContainer from './containers/MedicationsContainer'
+import TakedosagesInput from './components/TakedosageInput'
 
-import {Route, Switch} from 'react-router-dom'
+import {Redirect, Route, Switch, Link} from 'react-router-dom'
 import Home from './components/Home'
 import Doctors from './components/Doctors'
 import NavBar from './components/NavBar'
+
 
 class App extends React.Component {
 
@@ -18,12 +20,16 @@ class App extends React.Component {
 
       <div className="App">
         <NavBar/>
-        <Home/>
-        <PatientsContainer/>
-        <PrescriptionsContainer/>
-        <TakedosagesContainer/>
-        <MedicationsContainer/>
-        <Doctors.ListDoctors/>
+
+          <Home/>
+          <Switch>
+            <Route path='/patients' component={PatientsContainer}/>
+            <Route path='/prescriptions' component={PrescriptionsContainer}/>
+            <Route path='/takedosages' component={TakedosagesContainer}/>
+            <Route path='/medications' component={MedicationsContainer}/>
+            <Route path='/doctors' component={Doctors}/>
+          </Switch>
+
       </div>
     );
   }

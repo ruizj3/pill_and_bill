@@ -9,13 +9,14 @@ import TakedosageInput from '../components/TakedosageInput'
 
 import {fetchPatients} from '../actions/fetchPatients'
 import {fetchMedications} from '../actions/fetchMedications'
+import { bindActionCreators } from 'redux';
 
 class PrescriptionsContainer extends React.Component {
 
 
   componentDidMount() {
     Promise.all([
-    this.props.fetchPrescriptions()])
+    this.props.prescriptions])
   }
 
 
@@ -44,8 +45,14 @@ const mapStateToProps = state => {
   }
 }
 
-export default {
-  ListPrecriptions: connect(mapStateToProps, {fetchPrescriptions})(PrescriptionsContainer),
-  ListPatients: connect(mapStateToProps, {fetchPatients})(PrescriptionsContainer),
-  ListMedications: connect(mapStateToProps, {fetchMedications})(PrescriptionsContainer)
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      fetchPrescriptions: dispatch(fetchPrescriptions()),
+      fetchPatients: dispatch(fetchPatients()),
+      fetchMedications: dispatch(fetchMedications())
+    }
+  }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrescriptionsContainer)

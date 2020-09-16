@@ -9,12 +9,13 @@ import PatientInput from '../components/PatientInput'
 
 import {fetchDoctors} from '../actions/fetchDoctors'
 
+
 class PatientsContainer extends React.Component {
 
 
   componentDidMount() {
     Promise.all([
-    this.props.fetchPatients()])
+    this.props.patients])
   }
 
 
@@ -40,7 +41,13 @@ const mapStateToProps = state => {
   }
 }
 
-export default {
-  ListPatients: connect(mapStateToProps, {fetchPatients})(PatientsContainer),
-  ListDoctors: connect(mapStateToProps, {fetchDoctors})(PatientsContainer)
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      fetchPatients: dispatch(fetchPatients()),
+      fetchDoctors: dispatch(fetchDoctors())
+    }
+  }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(PatientsContainer)

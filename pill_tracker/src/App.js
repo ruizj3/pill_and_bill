@@ -19,8 +19,8 @@ class App extends React.Component {
       <div className="App">
         <NavBar/>
         <Home/>
-        <PatientsContainer.ListPatients/>
-        <PrescriptionsContainer.ListPrecriptions/>
+        <PatientsContainer/>
+        <PrescriptionsContainer/>
         <TakedosagesContainer/>
         <MedicationsContainer/>
         <Doctors.ListDoctors/>

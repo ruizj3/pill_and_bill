@@ -30,6 +30,10 @@ class PatientInput extends React.Component {
     window.location.replace(`http://localhost:3001/patients`)
   }
 
+  doctorChanged = (event) => {
+    this.setState({ doctor_id: event.target.value});
+  };
+
   render() {
     return (
       <div>
@@ -40,8 +44,13 @@ class PatientInput extends React.Component {
           <input type='text' placeholder='DOB' value={this.state.dob} name="dob" onChange={this.handleChange}/><br/>
           <label>Password: </label>
           <input type='text' placeholder='Password' value={this.state.password} name="password" onChange={this.handleChange}/><br/>
-          <label>Doctor_ID: </label>
-          <input type='text' placeholder='Doctor_ID' value={this.state.doctor_id} name="doctor_id" onChange={this.handleChange}/><br/>
+          <label>Doctor Name: </label>
+            <select value={this.state.doctor_id} name="doctor_id" onChange={this.doctorChanged} >
+              {this.props.doctors.map(
+                (doctor) => <option key={doctor.id} value={doctor.id}>{doctor.attributes.username}</option>)
+              }
+            </select>
+          <br/>
           <input type="submit"/>
         </form>
       </div>
@@ -49,5 +58,12 @@ class PatientInput extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    patients: state.patientReducer.patients,
+    doctors: state.doctorReducer.doctors
+  }
+}
 
-export default connect(null, {addPatient})(PatientInput)
+
+export default connect(mapStateToProps, {addPatient})(PatientInput)

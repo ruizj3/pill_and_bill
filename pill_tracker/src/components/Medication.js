@@ -6,7 +6,6 @@ import MedicationDelete from './MedicationDelete'
 const Medication = (props) => {
 
   const medication = props.medications.filter(medication => medication.id == props.match.params.id)[0]
-  console.log(medication)
 
   return (
     <div>

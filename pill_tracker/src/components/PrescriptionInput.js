@@ -38,8 +38,6 @@ class PrescriptionInput extends React.Component {
   };
 
   medicationChanged = (event) => {
-    console.log(event);
-    console.log(event.target.value);
     this.setState({ medication_id: event.target.value});
   };
 

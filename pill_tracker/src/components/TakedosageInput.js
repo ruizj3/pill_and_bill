@@ -7,8 +7,8 @@ import {addTakedosage} from '../actions/addTakedosage'
 class TakedosageInput extends React.Component {
 
   state = {
-    datetaken: this.props.history.location.state.datetaken,
-    prescription_id: this.props.history.location.state.prescription_id
+    datetaken: this.props.history.location.state.datetaken ? this.props.history.location.state.datetaken : '',
+    prescription_id: this.props.history.location.state.prescription_id ? this.props.history.location.state.prescription_id : ''
   }
 
   handleChange = (event) => {

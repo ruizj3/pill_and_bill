@@ -26,6 +26,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default {
-  ListDoctors: connect(mapStateToProps, {fetchDoctors})(Doctors),
-}
+export default connect(mapStateToProps, {fetchDoctors})(Doctors)

@@ -7,6 +7,9 @@ import Prescription from '../components/Prescription'
 import PrescriptionInput from '../components/PrescriptionInput'
 import TakedosageInput from '../components/TakedosageInput'
 
+import {fetchPatients} from '../actions/fetchPatients'
+import {fetchMedications} from '../actions/fetchMedications'
+
 class PrescriptionsContainer extends React.Component {
 
 
@@ -17,6 +20,7 @@ class PrescriptionsContainer extends React.Component {
 
 
   render() {
+
       return (
           <div>
 
@@ -34,8 +38,14 @@ class PrescriptionsContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    prescriptions: state.prescriptionReducer.prescriptions
+    prescriptions: state.prescriptionReducer.prescriptions,
+    patients: state.patientReducer.patients,
+    medications: state.medicationReducer.medications
   }
 }
 
-export default connect(mapStateToProps, {fetchPrescriptions})(PrescriptionsContainer)
+export default {
+  ListPrecriptions: connect(mapStateToProps, {fetchPrescriptions})(PrescriptionsContainer),
+  ListPatients: connect(mapStateToProps, {fetchPatients})(PrescriptionsContainer),
+  ListMedications: connect(mapStateToProps, {fetchMedications})(PrescriptionsContainer)
+}

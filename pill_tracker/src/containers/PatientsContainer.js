@@ -7,6 +7,8 @@ import Patient from '../components/Patient'
 import NavBar from '../components/NavBar'
 import PatientInput from '../components/PatientInput'
 
+import {fetchDoctors} from '../actions/fetchDoctors'
+
 class PatientsContainer extends React.Component {
 
 
@@ -19,8 +21,6 @@ class PatientsContainer extends React.Component {
   render() {
       return (
           <div>
-
-            <NavBar/>
 
             <Switch>
               <Route path='/patients/new' component={PatientInput}/>
@@ -35,8 +35,12 @@ class PatientsContainer extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    patients: state.patientReducer.patients
+    patients: state.patientReducer.patients,
+    doctors: state.doctorReducer.doctors
   }
 }
 
-export default connect(mapStateToProps, {fetchPatients})(PatientsContainer)
+export default {
+  ListPatients: connect(mapStateToProps, {fetchPatients})(PatientsContainer),
+  ListDoctors: connect(mapStateToProps, {fetchDoctors})(PatientsContainer)
+}

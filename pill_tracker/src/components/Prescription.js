@@ -1,12 +1,11 @@
 import React from 'react'
-import {Redirect} from 'react-router-dom'
 
 
 const Prescription = (props) => {
 
-  
 
-  let prescription = props.prescriptions.filter(prescription => prescription.id == props.match.params.id)[0]
+
+  let prescription = props.prescriptions.filter(prescription => prescription.id === props.match.params.id)[0]
 
 
   return (

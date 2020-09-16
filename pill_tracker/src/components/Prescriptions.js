@@ -1,6 +1,5 @@
 import React from 'react'
-import {Route, Link} from 'react-router-dom'
-import Prescription from './Prescription'
+import {Link} from 'react-router-dom'
 
 const Prescriptions = props => {
   const today = new Date()

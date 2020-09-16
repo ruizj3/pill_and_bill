@@ -1,6 +1,6 @@
 import React from 'react'
-import {Route, Link} from 'react-router-dom'
-import Patient from './Patient'
+import {Link} from 'react-router-dom'
+
 
 const Patients = props => {
 

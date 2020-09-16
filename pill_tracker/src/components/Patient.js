@@ -1,11 +1,10 @@
 import React from 'react'
-import {Redirect} from 'react-router-dom'
-import {Route, Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 const Patient = (props) => {
 
-  const patient = props.patients.filter(patient => patient.id == props.match.params.id)[0]
+  const patient = props.patients.filter(patient => patient.id === props.match.params.id)[0]
 
 
   return (

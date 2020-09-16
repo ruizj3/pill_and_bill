@@ -9,7 +9,7 @@ import TakedosageInput from '../components/TakedosageInput'
 
 import {fetchPatients} from '../actions/fetchPatients'
 import {fetchMedications} from '../actions/fetchMedications'
-import { bindActionCreators } from 'redux';
+
 
 class PrescriptionsContainer extends React.Component {
 

@@ -1,12 +1,11 @@
 import React from 'react';
-import {connect} from 'react-redux'
 import PatientsContainer from './containers/PatientsContainer'
 import PrescriptionsContainer from './containers/PrescriptionsContainer'
 import TakedosagesContainer from './containers/TakedosagesContainer'
 import MedicationsContainer from './containers/MedicationsContainer'
-import TakedosagesInput from './components/TakedosageInput'
 
-import {Redirect, Route, Switch, Link} from 'react-router-dom'
+
+import {Route, Switch} from 'react-router-dom'
 import Home from './components/Home'
 import Doctors from './components/Doctors'
 import NavBar from './components/NavBar'

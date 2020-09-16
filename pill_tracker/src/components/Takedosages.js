@@ -1,6 +1,5 @@
 import React from 'react'
-import {Route, Link} from 'react-router-dom'
-import Takedosage from './Takedosage'
+import {Link} from 'react-router-dom'
 
 const Takedosages = props => {
 

@@ -1,6 +1,5 @@
 import React from 'react'
-import {Route, Link} from 'react-router-dom'
-import Medication from './Medication'
+import {Link} from 'react-router-dom'
 
 
 const Medications = props => {

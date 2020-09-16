@@ -1,10 +1,10 @@
 import React from 'react'
-import {Route, Link} from 'react-router-dom'
-import {Redirect} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+
 
 const Takedosage = (props) => {
 
-  const takedosage = props.takedosages.filter(takedosage => takedosage.id == props.match.params.id)[0]
+  const takedosage = props.takedosages.filter(takedosage => takedosage.id === props.match.params.id)[0]
 
   return (
     <div>

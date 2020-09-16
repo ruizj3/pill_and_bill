@@ -4,7 +4,6 @@ import {Route, Switch} from 'react-router-dom'
 import {fetchPatients} from '../actions/fetchPatients'
 import Patients from '../components/Patients'
 import Patient from '../components/Patient'
-import NavBar from '../components/NavBar'
 import PatientInput from '../components/PatientInput'
 
 import {fetchDoctors} from '../actions/fetchDoctors'

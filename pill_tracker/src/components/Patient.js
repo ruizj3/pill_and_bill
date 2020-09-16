@@ -1,5 +1,6 @@
 import React from 'react'
 import {Redirect} from 'react-router-dom'
+import {Route, Link} from 'react-router-dom'
 
 
 const Patient = (props) => {
@@ -14,6 +15,12 @@ const Patient = (props) => {
         Patient Name: {patient ? patient.attributes.username : null} DOB: {patient ? patient.attributes.dob : null}
       </h2>
       <p>Doctor Name: {patient ? patient.attributes.doctor.username : null}</p>
+      Prescriptions List:
+      {patient ? patient.attributes.prescription.map(prescription =>
+        <li key={prescription.id}>
+          <Link to={`/prescriptions/${prescription.id}`}>{prescription.id}</Link>
+        </li> ) : null}<br/>
+      <Link to={{pathname:`/prescriptions/new`, state: { patient_id: patient.id }}} > Add Prescription</Link>
 
     </div>
   )

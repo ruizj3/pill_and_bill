@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import Counter from './Counter'
 
 
 class Patients extends React.Component {
@@ -19,6 +20,7 @@ class Patients extends React.Component {
   return (
 
     <div>
+      <Counter />
       <label>Search Patient Name: </label>
       <input name="username" onChange={this.handleChange}/>
 

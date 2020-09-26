@@ -26,7 +26,7 @@ class Counter extends React.Component {
     })
   }
 
-  handleResume= (event) => {
+  handleResume = (event) => {
     this.setState({counting: true}, () => {
       this.interval = setInterval(() => {
         this.setState((state) => {
@@ -38,7 +38,7 @@ class Counter extends React.Component {
 
 
   render() {
-  
+
   return (
 
     <div>

@@ -15,7 +15,7 @@ class Patients extends React.Component {
     })
   }
 
-  render() {console.log(this.state.username)
+  render() {
     const searchPatients = this.props.patients.filter(name => name.attributes.username.toLowerCase().includes(this.state.username.toLowerCase()))
   return (
 

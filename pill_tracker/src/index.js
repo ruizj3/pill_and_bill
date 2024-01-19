@@ -12,7 +12,8 @@ import medicationReducer from './reducers/medicationReducer'
 import doctorReducer from './reducers/doctorReducer'
 
 import App from './App';
-
+import './index.css';
+import NavBar from './components/NavBar'
 //const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 // Automatically adds the thunk middleware and the Redux DevTools extension
@@ -34,6 +35,7 @@ const root = createRoot(container); // Create a root
 root.render(
   <Provider store={store}>
     <Router>
+      <NavBar/>
       <App />
       (R)Pill and Bill
     </Router>

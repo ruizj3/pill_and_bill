@@ -1,35 +1,31 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import Counter from './Counter'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Counter from './Counter';
 
+const Patients = ({ patients }) => {
+  const [username, setUsername] = useState('');
 
-class Patients extends React.Component {
+  const handleChange = (event) => {
+    setUsername(event.target.value);
+  };
 
-  state = {
-    username: '',
-  }
+  const searchPatients = patients.filter(name => 
+    name.attributes.username.toLowerCase().includes(username.toLowerCase())
+  );
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
-  render() {
-    const searchPatients = this.props.patients.filter(name => name.attributes.username.toLowerCase().includes(this.state.username.toLowerCase()))
   return (
-
     <div>
       <Counter />
       <label>Search Patient Name: </label>
-      <input name="username" onChange={this.handleChange}/>
+      <input name="username" value={username} onChange={handleChange} />
 
-      {searchPatients.map(patient =>
+      {searchPatients.map(patient => (
         <li key={patient.id}>
-          <Link to={`/patients/${patient.id}`}>{patient.attributes.username}</Link>
-        </li> )}
+          <Link to={`/patients/patients/${patient.id}`}>{patient.attributes.username}</Link>
+        </li>
+      ))}
     </div>
-  )
- }
-}
-export default Patients
+  );
+};
+
+export default Patients;

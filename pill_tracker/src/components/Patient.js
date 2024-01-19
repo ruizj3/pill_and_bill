@@ -1,14 +1,13 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 const Patient = (props) => {
-
-  const patient = props.patients.filter(patient => patient.id === props.match.params.id)[0]
-
+  const { id } = useParams(); // Get the 'id' parameter from the URL
+  console.log(props);
+  
+  const patient = props.patients.filter(patient => patient.id === id)[0];
 
   return (
-
     <div>
       <h2>
         Patient Name: {patient ? patient.attributes.username : null} DOB: {patient ? patient.attributes.dob : null}
@@ -19,12 +18,9 @@ const Patient = (props) => {
         <li key={prescription.id}>
           <Link to={`/prescriptions/${prescription.id}`}>{prescription.id}</Link>
         </li> ) : null}<br/>
-      <Link to={{pathname:`/prescriptions/new`, state: { patient_id: patient.id }}} > Add Prescription</Link>
-
+      <Link to={{pathname:`/prescriptions/new`, state: { patient_id: patient ? patient.id : null }}} > Add Prescription</Link>
     </div>
-  )
+  );
+};
 
-
-}
-
-export default Patient
+export default Patient;

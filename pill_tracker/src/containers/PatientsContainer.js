@@ -1,52 +1,35 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {Route, Switch} from 'react-router-dom'
-import {fetchPatients} from '../actions/fetchPatients'
-import Patients from '../components/Patients'
-import Patient from '../components/Patient'
-import PatientInput from '../components/PatientInput'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { fetchPatients } from '../actions/fetchPatients';
+import { fetchDoctors } from '../actions/fetchDoctors';
+import Patients from '../components/Patients';
+import Patient from '../components/Patient';
+import PatientInput from '../components/PatientInput';
 
-import {fetchDoctors} from '../actions/fetchDoctors'
+const PatientsContainer = () => {
+  const dispatch = useDispatch();
+  const patients = useSelector(state => state.patientsRed.patients || []);
+  const doctors = useSelector(state => state.doctorsRed.doctors);
 
+  useEffect(() => {
+    dispatch(fetchPatients());
+    dispatch(fetchDoctors());
+  }, [dispatch]);
 
-class PatientsContainer extends React.Component {
+  useEffect(() => {
+    console.log("Fetched patients data:", patients);
+  }, [patients]);  // Log patients data whenever it changes
 
-
-  componentDidMount() {
-    Promise.all([
-    this.props.patients])
-  }
-
-
-  render() {
-      return (
-          <div>
-
-            <Switch>
-              <Route path='/patients/new' component={PatientInput}/>
-              <Route path='/patients/:id' render={(routerProps) => <Patient {...routerProps} patients={this.props.patients}/>}/>
-              <Route path='/patients' render={(routerProps) => <Patients {...routerProps} patients={this.props.patients}/>}/>
-            </Switch>
-
-          </div>
-      )
-  }
+  return (
+    <div>
+      <Routes>
+        <Route path='/patients/new' element={<PatientInput />} />
+        <Route path='/patients/:id' element={<Patient patients={patients} />} />
+        <Route path='/patientsall' element={<Patients patients={patients} />} />
+      </Routes>
+    </div>
+  );
 }
 
-const mapStateToProps = state => {
-  return {
-    patients: state.patientReducer.patients,
-    doctors: state.doctorReducer.doctors
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: {
-      fetchPatients: dispatch(fetchPatients()),
-      fetchDoctors: dispatch(fetchDoctors())
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(PatientsContainer)
+export default PatientsContainer;

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Route, Switch} from 'react-router-dom'
+import {Route, Routes} from 'react-router-dom'
 import {fetchMedications} from '../actions/fetchMedications'
 import Medications from '../components/Medications'
 import Medication from '../components/Medication'
@@ -20,11 +20,11 @@ class MedicationsContainer extends React.Component {
       return (
           <div>
 
-            <Switch>
-              <Route path='/medications/new' component={MedicationInput}/>
+            <Routes>
+              <Route path='/medications/new' element={MedicationInput}/>
               <Route path='/medications/:id' render={(routerProps) => <Medication {...routerProps} medications={this.props.medications}/>}/>
               <Route path='/medications' render={(routerProps) => <Medications {...routerProps} medications={this.props.medications}/>}/>
-            </Switch>
+            </Routes>
 
           </div>
       )

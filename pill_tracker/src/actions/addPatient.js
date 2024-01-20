@@ -1,7 +1,7 @@
 export const addPatient = (data) => {
 
-  return (dispatch) => {
-    fetch('http://localhost:3000/patients', {
+  return async (dispatch) => {
+    const response = await fetch('http://localhost:3000/patients', {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -9,8 +9,9 @@ export const addPatient = (data) => {
       method: 'POST',
       body: JSON.stringify(data)
     })
-    .then(response => response.json())
-    .then(patient => dispatch({type: 'ADD_PATIENT', payload: patient}))
+    const newPatient = await response.json()
+    await dispatch({type: 'ADD_PATIENT', payload: newPatient})
+    return newPatient.id
   }
 
 }

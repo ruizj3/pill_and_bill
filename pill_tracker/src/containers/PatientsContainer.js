@@ -24,7 +24,7 @@ const PatientsContainer = () => {
   return (
     <div>
       <Routes>
-        <Route path='/patients/new' element={<PatientInput />} />
+        <Route path='/patients/new' element={<PatientInput doctors={doctors}/>} />
         <Route path='/patients/:id' element={<Patient patients={patients} />} />
         <Route path='/patientsall' element={<Patients patients={patients} />} />
       </Routes>

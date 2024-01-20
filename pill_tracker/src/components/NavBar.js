@@ -7,7 +7,7 @@ const NavBar = (props) => {
     <div className='NavBar'>
       <Link to='/home' style={{paddingRight: '10px'}}>Home  </Link>
       <Link to='/patients/patientsall' style={{paddingRight: '10px'}}>Patients  </Link>
-      <Link to='/patients/new' style={{paddingRight: '10px'}}> Add Patient</Link>
+      <Link to='/patients/patients/new' style={{paddingRight: '10px'}}> Add Patient</Link>
       <Link to='/prescriptions' style={{paddingRight: '10px'}}>Prescriptions  </Link>
       <Link to='/prescriptions/new' style={{paddingRight: '10px'}}>Add Prescription  </Link>
       <Link to='/takedosages' style={{paddingRight: '10px'}}>Takedosages List  </Link>

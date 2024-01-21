@@ -1,22 +1,18 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-
-const Medications = props => {
-
-
+const Medications = ({ medications }) => {
   return (
     <div>
-      {props.medications.map(medication =>
-        <li key={medication.id}>
-
-          <Link to={`/medications/${medication.id}`}>{medication.attributes.name}</Link>
-        </li>) }
+      <ul>
+        {medications.map(medication => (
+          <li key={medication.id}>
+            <Link to={`/medications/medications/${medication.id}`}>{medication.attributes.name}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
-
-  )
+  );
 }
 
-
-
-export default Medications
+export default Medications;

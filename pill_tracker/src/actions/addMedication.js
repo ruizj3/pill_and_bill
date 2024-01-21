@@ -1,7 +1,7 @@
 export const addMedication = (data) => {
 
-  return (dispatch) => {
-    fetch('http://localhost:3000/medications', {
+  return async (dispatch) => {
+    const response = await fetch('http://localhost:3000/medications', {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -9,8 +9,9 @@ export const addMedication = (data) => {
       method: 'POST',
       body: JSON.stringify(data)
     })
-    .then(response => response.json())
-    .then(medication => dispatch({type: 'ADD_MEDICATION', payload: medication}))
+    const newMedication = await response.json()
+    await dispatch({type: 'ADD_MEDICATION', payload: newMedication})
+    return newMedication.id
   }
 
 }

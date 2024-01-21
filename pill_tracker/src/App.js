@@ -26,10 +26,10 @@ class App extends React.Component {
             <Route path='/' element={<Home />} />
             <Route path='/home' element={<Home />} />
             <Route path='/patients/*' element={<PatientsContainer />}/>
-            <Route path='/prescriptions' element={<PrescriptionsContainer />}/>
-            <Route path='/takedosages' element={<TakedosagesContainer />}/>
-            <Route path='/medications' element={<MedicationsContainer />}/>
-            <Route path='/doctors' element={<Doctors />}/>
+            <Route path='/prescriptions/*' element={<PrescriptionsContainer />}/>
+            <Route path='/takedosages/*' element={<TakedosagesContainer />}/>
+            <Route path='/medications/*' element={<MedicationsContainer />}/>
+            <Route path='/doctors/*' element={<Doctors />}/>
           </Routes>
 
       </div>

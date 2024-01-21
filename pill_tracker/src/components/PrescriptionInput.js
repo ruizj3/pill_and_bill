@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { addPrescription } from '../actions/addPrescription';
 import { useNavigate } from 'react-router-dom';
 import { fetchPrescriptions } from '../actions/fetchPrescriptions';
+import CustomDropdown from './CustomDropdown';
 
 function PrescriptionInput() {
   const dispatch = useDispatch();
@@ -14,8 +15,8 @@ function PrescriptionInput() {
     dosagestotal: '',
     dosagesper: '',
     dosagesfrequency: '',
-    patient_id: 1,
-    medication_id: 1
+    patient_id: '',
+    medication_id: ''
   });
 
   const handleChange = (event) => {
@@ -44,22 +45,50 @@ function PrescriptionInput() {
 
   }
 
+  const handlePatientSelect = (patientId) => {
+    setFormState({
+      ...formState,
+      patient_id: patientId
+    });
+  };
+
+  const patientOptions = patients.map(patient => ({
+    value: patient.id,
+    label: patient.attributes.username
+  }));
+
+  const selectedPatientName = patients.find(patient => patient.id === formState.patient_id)?.attributes.username || '';
+
+  const handleMedicationSelect = (medicationId) => {
+    setFormState({
+      ...formState,
+      medication_id: medicationId
+    });
+  };
+
+  const medicationOptions = medications.map(medication => ({
+    value: medication.id,
+    label: medication.attributes.name
+  }));
+
+  const selectedMedicationName = medications.find(medication => medication.id === formState.medication_id)?.attributes.name || '';
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <label>Patient Name: </label>
-        <select value={formState.patient_id} name="patient_id" onChange={handleChange}>
-          {patients.map(patient => (
-            <option key={patient.id} value={patient.id}>{patient.attributes.username}</option>
-          ))}
-        </select>
+        <CustomDropdown 
+          options={patientOptions}
+          selectedValue={selectedPatientName}
+          onSelect={handlePatientSelect}
+        />
         <br />
         <label>Medication Name: </label>
-        <select value={formState.medication_id} name="medication_id" onChange={handleChange}>
-          {medications.map(medication => (
-            <option key={medication.id} value={medication.id}>{medication.attributes.name}</option>
-          ))}
-        </select>
+        <CustomDropdown 
+          options={medicationOptions}
+          selectedValue={selectedMedicationName}
+          onSelect={handleMedicationSelect}
+        />
         <br />
         <label>Dosages Total: </label>
         <input type='text' placeholder='Dosages Total' value={formState.dosagestotal} name="dosagestotal" onChange={handleChange} /><br />

@@ -1,22 +1,25 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const NavBar = (props) => {
-  
   return (
-    <div className='NavBar'>
-      <Link to='/home' style={{paddingRight: '10px'}}>Home  </Link>
-      <Link to='/patients/patientsall' style={{paddingRight: '10px'}}>Patients  </Link>
-      <Link to='/patients/patients/new' style={{paddingRight: '10px'}}> Add Patient</Link>
-      <Link to='/prescriptions/prescriptionsall' style={{paddingRight: '10px'}}>Prescriptions  </Link>
-      <Link to='/prescriptions/prescriptions/new' style={{paddingRight: '10px'}}>Add Prescription  </Link>
-      <Link to='/takedosages/takedosages' style={{paddingRight: '10px'}}>Takedosages List  </Link>
-      <Link to='/medications/medications' style={{paddingRight: '10px'}}>Medications  </Link>
-      <Link to='/medications/medications/new' style={{paddingRight: '10px'}}> Add Medication</Link>
-
+    <div className='navbar'> 
+      <div className='navbar-brand'> 
+        {/* Brand or Logo */}
+      </div>
+      <ul className='navbar-menu'>
+        <li><Link to='/home'>Home</Link></li>
+        <li><Link to='/patients/patientsall'>Patients</Link></li>
+        <li><Link to='/patients/patients/new'>Add Patient</Link></li>
+        <li><Link to='/prescriptions/prescriptionsall'>Prescriptions</Link></li>
+        <li><Link to='/prescriptions/prescriptions/new'>Add Prescription</Link></li>
+        <li><Link to='/takedosages/takedosages'>Takedosages List</Link></li>
+        <li><Link to='/medications/medicationsall'>Medications</Link></li>
+        <li><Link to='/medications/medications/new'>Add Medication</Link></li>
+        <li><Link to='/doctors/doctorsall'>Doctors</Link></li>
+      </ul>
     </div>
+  );
+};
 
-  )
-}
-
-export default NavBar
+export default NavBar;

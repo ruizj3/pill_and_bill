@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 
 const Takedosage = ({ takedosages }) => {
   const { id } = useParams();
-  const takedosage = takedosages.find(td => td.id === parseInt(id, 10));
+  const takedosage = takedosages.find(td => td.id === id);
 
   return (
     <div>
@@ -14,7 +14,7 @@ const Takedosage = ({ takedosages }) => {
         {takedosage && (
           <>
             <li>
-              Prescription Number: <Link to={`/prescriptions/${takedosage.attributes.prescription_id}`}>{takedosage.attributes.prescription_id}</Link>
+              Prescription Number: <Link to={`/prescriptions/prescriptions/${takedosage.attributes.prescription_id}`}>{takedosage.attributes.prescription_id}</Link>
             </li>
             <li>
               Date Taken: {takedosage.attributes.datetaken}

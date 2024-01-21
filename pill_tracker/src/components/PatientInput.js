@@ -3,13 +3,16 @@ import { useDispatch } from 'react-redux';
 import { addPatient } from '../actions/addPatient';
 import { useNavigate} from 'react-router-dom';
 import { fetchPatients } from '../actions/fetchPatients';
+import CustomDropdown from './CustomDropdown';
 
 const PatientInput = ({ doctors })  => {
+  const firstDoctor = doctors[0]//.filter(docter => docter.id === 1)
+  console.log("first doctor", firstDoctor)
   const [state, setState] = useState({
     username: '',
     dob: '',
     password: '',
-    doctor_id: 1
+    doctor_id: firstDoctor.id
   });
 
   const dispatch = useDispatch();
@@ -49,9 +52,22 @@ const handleSubmit = async (event) => {
   }
 };
 
-  const doctorChanged = (event) => {
-    setState({ doctor_id: event.target.value});
-  };  
+  //const doctorChanged = (event) => {
+  //  setState({ doctor_id: event.target.value});
+  //};  
+  const handleDoctorSelect = (doctorId) => {
+    setState({
+      ...state,
+      doctor_id: doctorId
+    });
+  };
+
+  const doctorOptions = doctors.map(doctor => ({
+    value: doctor.id,
+    label: doctor.attributes.username
+  }));
+
+  const selectedDoctorName = doctors.find(doctor => doctor.id === state.doctor_id)?.attributes.username || '';
 
   return (
     <div>
@@ -63,11 +79,11 @@ const handleSubmit = async (event) => {
         <label>Password: </label>
         <input type='text' placeholder='Password' value={state.password} name="password" onChange={handleChange}/><br/>
         <label>Doctor Name: </label>
-        <select value={state.doctor_id} name="doctor_id" onChange={handleChange}>
-          {doctors.map((doctor) => (
-            <option key={doctor.id} value={doctor.id}>{doctor.attributes.username}</option>
-          ))}
-        </select>
+        <CustomDropdown 
+          options={doctorOptions}
+          selectedValue={selectedDoctorName}
+          onSelect={handleDoctorSelect}
+        />
         <br/>
         <input type="submit"/>
       </form>

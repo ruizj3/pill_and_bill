@@ -1,10 +1,7 @@
 export function fetchDoctors() {
-  return (dispatch) => {
-    fetch('http://localhost:3000/doctors')
-    .then(resp => resp.json())
-    .then(doctors => dispatch({
-      type: 'FETCH_DOCTORS',
-      payload: doctors.data
-    }))
+  return async (dispatch) => {
+    const response = await fetch('http://localhost:3000/doctors')
+    const allDoctors = await response.json()
+    await dispatch({type: 'FETCH_DOCTORS',payload: allDoctors.data})
   }
 }

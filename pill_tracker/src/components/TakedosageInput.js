@@ -26,7 +26,7 @@ function TakedosageInput() {
     event.preventDefault();
     try {
       const newTakeDosage = await dispatch(addTakedosage(takedosage));
-      if (newTakeDosage.status == 200) {
+      if (newTakeDosage.status === 200) {
         navigate('/prescriptions/prescriptionsall');
       } else {
         console.log("Error submitting dosage: Non-200 response");

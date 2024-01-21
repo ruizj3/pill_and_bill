@@ -11,8 +11,8 @@ const NavBar = (props) => {
       <Link to='/prescriptions/prescriptionsall' style={{paddingRight: '10px'}}>Prescriptions  </Link>
       <Link to='/prescriptions/prescriptions/new' style={{paddingRight: '10px'}}>Add Prescription  </Link>
       <Link to='/takedosages/takedosages' style={{paddingRight: '10px'}}>Takedosages List  </Link>
-      <Link to='/medications' style={{paddingRight: '10px'}}>Medications  </Link>
-      <Link to='/medications/new' style={{paddingRight: '10px'}}> Add Medication</Link>
+      <Link to='/medications/medications' style={{paddingRight: '10px'}}>Medications  </Link>
+      <Link to='/medications/medications/new' style={{paddingRight: '10px'}}> Add Medication</Link>
 
     </div>
 

@@ -1,28 +1,28 @@
-import React from 'react'
-import MedicationEdit from './MedicationEdit'
-import MedicationDelete from './MedicationDelete'
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import MedicationEdit from './MedicationEdit';
+import MedicationDelete from './MedicationDelete';
 
-const Medication = (props) => {
-
-  const medication = props.medications.filter(medication => medication.id === props.match.params.id)[0]
+const Medication = ({ medications }) => {
+  const { id } = useParams();
+  const medication = medications.find(med => med.id === id);
 
   return (
     <div>
       <h2>
-        Medication Name: {medication ? medication.attributes.name : null}
-
+        Medication Name: {medication ? medication.attributes.name : 'Not Found'}
       </h2>
-      {medication ? medication.attributes.prescription.map(prescription =>
+      {medication && medication.attributes.prescription.map(prescription => (
         <li key={prescription.id}>
           Connected Prescription: {prescription.id}
-        </li>) : null }
+        </li>
+      ))}
       <h3>Edit Medication</h3>
-      <MedicationEdit medication={medication}/>
+      <MedicationEdit medication={medication} />
       <h4>Delete Medication</h4>
-      <MedicationDelete medication={medication}/>
-
+      <MedicationDelete medication={medication} />
     </div>
-  )
+  );
 }
 
-export default Medication
+export default Medication;

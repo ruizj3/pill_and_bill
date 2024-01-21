@@ -1,46 +1,48 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {addMedication} from '../actions/addMedication'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addMedication } from '../actions/addMedication';
+import { useNavigate } from 'react-router-dom';
+import { fetchMedications } from '../actions/fetchMedications';
 
-class MedicationInput extends React.Component {
+function MedicationInput() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  state = {
+  const [medication, setMedication] = useState({
     name: '',
     priceperpill: ''
-  }
+  });
 
-  handleChange = (event) => {
-    this.setState({
+  const handleChange = (event) => {
+    setMedication({
+      ...medication,
       [event.target.name]: event.target.value
-    })
+    });
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    this.props.addMedication(this.state)
-    this.setState({
-      name: '',
-      priceperpill: ''
-    })
-    window.location.reload(false)
-    window.location.replace(`http://localhost:3001/medications`)
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const newMedication = await dispatch(addMedication(medication));
+      await dispatch(fetchMedications())
+      console.log(newMedication)
+      navigate(`/medications/medications/${newMedication}`);
+    } catch (error){
+      console.log("Error adding medication:", error)
+    }
   }
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>Medication Name: </label>
-          <input type='text' placeholder='Name' value={this.state.name} name="name" onChange={this.handleChange}/><br/>
-          <label>Price Per Pill: </label>
-          <input type='text' placeholder='PricePerPill' value={this.state.priceperpill} name="priceperpill" onChange={this.handleChange}/><br/>
-          <input type="submit"/>
-        </form>
-        
-      </div>
-    )
-  }
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>Medication Name: </label>
+        <input type='text' placeholder='Name' value={medication.name} name="name" onChange={handleChange} /><br />
+        <label>Price Per Pill: </label>
+        <input type='text' placeholder='PricePerPill' value={medication.priceperpill} name="priceperpill" onChange={handleChange} /><br />
+        <input type="submit" />
+      </form>
+    </div>
+  );
 }
 
-
-export default connect(null, {addMedication})(MedicationInput)
+export default MedicationInput;

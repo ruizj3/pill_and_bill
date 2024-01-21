@@ -1,52 +1,62 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {editMedication} from '../actions/editMedication'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { editMedication } from '../actions/editMedication';
+import { useNavigate } from 'react-router-dom';
+import { fetchMedications } from '../actions/fetchMedications';
 
-class MedicationEdit extends React.Component {
+function MedicationEdit({ medication }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  state = {
+  const [formData, setFormData] = useState({
     name: '',
     priceperpill: ''
-  }
+  });
 
-  handleChange = (event) => {
-    this.setState({
+  const handleChange = (event) => {
+    setFormData({
+      ...formData,
       [event.target.name]: event.target.value
-    })
-
+    });
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    const medication = {...this.state, id: this.props.medication.id}
-    this.props.editMedication(medication)
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    this.setState({
+    try {
+      const updatedMedication = { ...formData, id: medication.id };
+      const response = await dispatch(editMedication(updatedMedication));
+      await dispatch(fetchMedications())
+      if (response.status === 200) {
+        navigate('/medications/medications');
+      } else {
+        console.log("Error editing medication: Non-200 response");
+      }
+      
+    } catch (error){
+      console.log("Error editing medication:", error)
+    }
+    
+    
+    // Reset form state after submission
+    setFormData({
       name: '',
       priceperpill: ''
-    })
-    window.location.reload(false)
+    });
 
   }
 
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>Medication Name: </label>
-          <input type='text' placeholder='Medication Name' value={this.state.name} name="name" onChange={this.handleChange}/><br/>
-          <label>Price Per Pill: </label>
-          <input type='text' placeholder='Price Per Pill' value={this.state.priceperpill} name="priceperpill" onChange={this.handleChange}/><br/>
-          <input type="submit"/>
-        </form>
-      </div>
-    )
-  }
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <label>Medication Name: </label>
+        <input type='text' placeholder='Medication Name' value={formData.name} name="name" onChange={handleChange} /><br />
+        <label>Price Per Pill: </label>
+        <input type='text' placeholder='Price Per Pill' value={formData.priceperpill} name="priceperpill" onChange={handleChange} /><br />
+        <input type="submit" />
+      </form>
+    </div>
+  );
 }
 
-MedicationEdit.defaultProps = {
-  medications: {}
-}
-
-
-export default connect(null, {editMedication})(MedicationEdit)
+export default MedicationEdit;

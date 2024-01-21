@@ -1,35 +1,36 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {deleteMedication} from '../actions/deleteMedication'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { deleteMedication } from '../actions/deleteMedication';
+import { fetchMedications } from '../actions/fetchMedications';
+import { useNavigate } from 'react-router-dom';
 
-class MedicationDelete extends React.Component {
+function MedicationDelete({ medication }) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  state = {
-    id: '',
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault()
-    const medication = {...this.state, id: this.props.medication.id}
-    this.props.deleteMedication(medication.id)
-    window.location.reload(false)
-    window.location.replace(`http://localhost:3001/medications`)
-
-  }
-
-  render() {
-
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <button type="submit">Delete</button>
-      </form>
-    )
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      if (medication && medication.id) {
+        console.log(medication)
+        const response = await dispatch(deleteMedication(medication.id));
+        if (response.status === 200){
+          await dispatch(fetchMedications())
+          navigate('/medications/medications');
+      } else {
+        console.log("Error deleting medication: Non-200 status.")
+      } 
+    }
+  } catch (error){
+    console.log("Error deleting medication:", error)
   }
 }
 
-MedicationDelete.defaultProps = {
-  medications: {}
+  return (
+    <form onSubmit={handleSubmit}>
+      <button type="submit">Delete</button>
+    </form>
+  );
 }
 
-
-export default connect(null, {deleteMedication})(MedicationDelete)
+export default MedicationDelete;

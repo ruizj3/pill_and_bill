@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addPrescription } from '../actions/addPrescription';
 import { useNavigate } from 'react-router-dom';
-import { fetchPatients } from '../actions/fetchPatients';
 import { fetchPrescriptions } from '../actions/fetchPrescriptions';
 
 function PrescriptionInput() {

@@ -9,7 +9,7 @@ function TakedosageInput() {
   const location = useLocation();
   console.log("Location:", location)
   const locationState = location.state || {};
-  console.log("Locaiton State:", locationState)
+  console.log("Location State:", locationState)
   const [takedosage, setTakedosage] = useState({
     datetaken: locationState.datetaken || '',
     prescription_id: locationState.prescription_id || ''

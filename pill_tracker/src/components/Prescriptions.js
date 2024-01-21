@@ -1,8 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import TakeDosageModal from './TakeDosageModal';
 
 const Prescriptions = ({ prescriptions }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPrescription, setSelectedPrescription] = useState(null);
   const today = new Date();
+
+  const handleOpenModal = (prescription) => {
+    console.log("Attempting to open modal:", prescription)
+    setSelectedPrescription(prescription);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedPrescription(null);
+  };
+
   return (
     <div>
       <ul>
@@ -15,18 +30,19 @@ const Prescriptions = ({ prescriptions }) => {
             Medication: {prescription.attributes.medication.name} -
             Dosages Per: {prescription.attributes.dosagesper} -
             Dosages Remaining: {prescription.attributes.dosagestotal} -
-            <Link to={{
-              pathname: `/takedosages/takedosages/new`,
-              //old method here -> stateData: { prescription_id: prescription.id, datetaken: today.toJSON().slice(0, 10) }
-            }} state = {{ prescription_id: prescription.id, datetaken: today.toJSON().slice(0, 10) }}>
-
-              Take Dosage
-            </Link>
+            <button onClick={() => handleOpenModal(prescription)}>Take Dosage</button>
           </li>
         ))}
       </ul>
+      {showModal && selectedPrescription && (
+        <TakeDosageModal
+          onClose={handleCloseModal}
+          prescription={selectedPrescription}
+          datetaken={today.toJSON().slice(0, 10)}
+        />
+      )}
     </div>
   );
-}
+};
 
 export default Prescriptions;

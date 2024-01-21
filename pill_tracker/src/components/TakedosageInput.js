@@ -1,50 +1,54 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {addTakedosage} from '../actions/addTakedosage'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { addTakedosage } from '../actions/addTakedosage';
+import { useNavigate, useLocation } from 'react-router-dom';
 
+function TakedosageInput() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  console.log("Location:", location)
+  const locationState = location.state || {};
+  console.log("Locaiton State:", locationState)
+  const [takedosage, setTakedosage] = useState({
+    datetaken: locationState.datetaken || '',
+    prescription_id: locationState.prescription_id || ''
+  });
 
-
-class TakedosageInput extends React.Component {
-
-  state = {
-    datetaken: this.props.history.location.state.datetaken ? this.props.history.location.state.datetaken : '',
-    prescription_id: this.props.history.location.state.prescription_id ? this.props.history.location.state.prescription_id : ''
-  }
-
-  handleChange = (event) => {
-    this.setState({
+  const handleChange = (event) => {
+    setTakedosage({
+      ...takedosage,
       [event.target.name]: event.target.value
-    })
+    });
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    this.props.addTakedosage(this.state)
-    this.setState({
-      datetaken: '',
-      prescription_id: ''
-    })
-    window.location.reload(false)
-    window.location.replace(`http://localhost:3001/prescriptions`)
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const newTakeDosage = await dispatch(addTakedosage(takedosage));
+      if (newTakeDosage.status == 200) {
+        navigate('/prescriptions/prescriptionsall');
+      } else {
+        console.log("Error submitting dosage: Non-200 response");
+      }
+      
+    } catch (error){
+      console.log("Error submitting dosage:", error)
+    }
   }
 
-  render() {
-
-    return (
-      <div>
+  return (
+    <div>
       Confirm Submission Below:
-        <form onSubmit={this.handleSubmit}>
-          <label>Prescription ID: </label>
-          <input type='text' placeholder='Prescription_ID' value={this.state.prescription_id} name="prescription_id" onChange={this.handleChange}/><br/>
-          <label>Date Taken: </label>
-          <input type='text' placeholder='Date Taken' value={this.state.datetaken} name="datetaken" onChange={this.handleChange}/><br/>
-          <input type="submit"/>
-        </form>
-      </div>
-
-    )
-  }
+      <form onSubmit={handleSubmit}>
+        <label>Prescription ID: </label>
+        <input type='text' placeholder='Prescription_ID' value={takedosage.prescription_id} name="prescription_id" onChange={handleChange} /><br />
+        <label>Date Taken: </label>
+        <input type='text' placeholder='Date Taken' value={takedosage.datetaken} name="datetaken" onChange={handleChange} /><br />
+        <input type="submit" />
+      </form>
+    </div>
+  );
 }
 
-
-export default connect(null, {addTakedosage})(TakedosageInput)
+export default TakedosageInput;

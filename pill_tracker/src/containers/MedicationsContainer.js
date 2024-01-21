@@ -19,7 +19,7 @@ function MedicationsContainer() {
       <Routes>
         <Route path='/medications/new' element={<MedicationInput />} />
         <Route path='/medications/:id' element={<Medication medications={medications} />}/>
-        <Route path='/medications' element={<Medications medications={medications} />}/>
+        <Route path='/medicationsall' element={<Medications medications={medications} />}/>
       </Routes>
     </div>
   );

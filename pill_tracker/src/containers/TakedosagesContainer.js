@@ -18,9 +18,9 @@ function TakedosagesContainer() {
   return (
     <div>
       <Routes>
-        <Route path='/takedosages/takedosages/new' element={<TakedosageInput />} />
-        <Route path='/takedosages/takedosages/:id' element={<Takedosage takedosages={takedosages} />}/>
-        <Route path='/takedosages/takedosages' element={<Takedosages takedosages={takedosages} />}/>
+        <Route path='/takedosages/new' element={<TakedosageInput />} />
+        <Route path='/takedosages/:id' element={<Takedosage takedosages={takedosages} />}/>
+        <Route path='/takedosages' element={<Takedosages takedosages={takedosages} />}/>
       </Routes>
     </div>
   );

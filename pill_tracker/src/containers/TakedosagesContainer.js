@@ -1,40 +1,29 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {Route, Routes} from 'react-router-dom'
-import {fetchTakedosages} from '../actions/fetchTakedosages'
-import Takedosages from '../components/Takedosages'
-import Takedosage from '../components/Takedosage'
-import TakedosageInput from '../components/TakedosageInput'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import { fetchTakedosages } from '../actions/fetchTakedosages';
+import Takedosages from '../components/Takedosages';
+import Takedosage from '../components/Takedosage';
+import TakedosageInput from '../components/TakedosageInput';
 
-class TakedosagesContainer extends React.Component {
+function TakedosagesContainer() {
+  const dispatch = useDispatch();
+  const takedosages = useSelector(state => state.takedosagesRed.takedosages);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    dispatch(fetchTakedosages());
+  }, [dispatch]);
 
-  componentDidMount() {
-    Promise.all([
-    this.props.fetchTakedosages()])
-  }
-
-
-  render() {
-      return (
-          <div>
-
-
-            <Routes>
-              <Route path='/takedosages/new' element={TakedosageInput}/>
-              <Route path='/takedosages/:id' render={(routerProps) => <Takedosage {...routerProps} takedosages={this.props.takedosages}/>}/>
-              <Route path='/takedosages' render={(routerProps) => <Takedosages {...routerProps} takedosages={this.props.takedosages}/>}/>
-            </Routes>
-
-          </div>
-      )
-  }
+  return (
+    <div>
+      <Routes>
+        <Route path='/takedosages/new' element={<TakedosageInput />} />
+        <Route path='/takedosages/:id' element={<Takedosage takedosages={takedosages} />}/>
+        <Route path='/takedosages' element={<Takedosages takedosages={takedosages} />}/>
+      </Routes>
+    </div>
+  );
 }
 
-const mapStateToProps = state => {
-  return {
-    takedosages: state.takedosageReducer.takedosages
-  }
-}
-
-export default connect(mapStateToProps, {fetchTakedosages})(TakedosagesContainer)
+export default TakedosagesContainer;

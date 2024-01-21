@@ -16,9 +16,9 @@ const Patient = (props) => {
       Prescriptions List:
       {patient ? patient.attributes.prescription.map(prescription =>
         <li key={prescription.id}>
-          <Link to={`/prescriptions/${prescription.id}`}>{prescription.id}</Link>
+          <Link to={`/prescriptions/prescriptions/${prescription.id}`}>{prescription.id}</Link>
         </li> ) : null}<br/>
-      <Link to={{pathname:`/prescriptions/new`, state: { patient_id: patient ? patient.id : null }}} > Add Prescription</Link>
+      <Link to={{pathname:`/prescriptions/prescriptions/new`, state: { patient_id: patient ? patient.id : null }}} > Add Prescription</Link>
     </div>
   );
 };

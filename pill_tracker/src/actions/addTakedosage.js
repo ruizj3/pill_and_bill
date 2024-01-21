@@ -1,7 +1,7 @@
 export const addTakedosage = (data) => {
 
-  return (dispatch) => {
-    fetch('http://localhost:3000/takedosages', {
+  return async (dispatch) => {
+    const response = await fetch('http://localhost:3000/takedosages', {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
@@ -9,8 +9,9 @@ export const addTakedosage = (data) => {
       method: 'POST',
       body: JSON.stringify(data)
     })
-    .then(response => response.json())
-    .then(takedosage => dispatch({type: 'ADD_TAKEDOSAGE', payload: takedosage}))
+    const newTakeDosage = await response.json()
+    await dispatch({type: 'ADD_TAKEDOSAGE', payload: newTakeDosage})
+    return response
   }
 
 }

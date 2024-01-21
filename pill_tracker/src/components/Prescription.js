@@ -1,30 +1,27 @@
-import React from 'react'
+import React from 'react';
+import { useParams } from 'react-router-dom';
 
-
-const Prescription = (props) => {
-
-
-
-  let prescription = props.prescriptions.filter(prescription => prescription.id === props.match.params.id)[0]
-
+const Prescription = ({ prescriptions }) => {
+  const { id } = useParams();
+  const prescription = prescriptions.find(p => p.id === id);
 
   return (
-
     <div>
       <h2>
-        Prescription Number: {prescription ? prescription.id : null}
+        Prescription Number: {prescription ? prescription.id : 'Not Found'}
       </h2>
-      <li>
-        Patient: {prescription ? prescription.attributes.patient.username : null}
-      </li>
-      <li>
-        Medication: {prescription ? prescription.attributes.medication.name : null}
-      </li>
-
+      {prescription && (
+        <>
+          <li>
+            Patient: {prescription.attributes.patient.username}
+          </li>
+          <li>
+            Medication: {prescription.attributes.medication.name}
+          </li>
+        </>
+      )}
     </div>
-  )
-
-
+  );
 }
 
-export default Prescription
+export default Prescription;

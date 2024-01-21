@@ -1,25 +1,29 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import { useParams, Link } from 'react-router-dom';
 
-
-const Takedosage = (props) => {
-
-  const takedosage = props.takedosages.filter(takedosage => takedosage.id === props.match.params.id)[0]
+const Takedosage = ({ takedosages }) => {
+  const { id } = useParams();
+  const takedosage = takedosages.find(td => td.id === parseInt(id, 10));
 
   return (
     <div>
-      <li>
-        Takedosage_ID: {takedosage ? takedosage.id : null}
-      </li>
-      <li>
-        Prescription Number: <Link to={`/prescriptions/${takedosage ? takedosage.attributes.prescription_id : null}`}>{takedosage ? takedosage.attributes.prescription_id : null}</Link>
-      </li>
-      <li>
-        Date Taken: {takedosage ? takedosage.attributes.datetaken : null}
-      </li>
-
+      <ul>
+        <li>
+          Takedosage_ID: {takedosage ? takedosage.id : 'Not Found'}
+        </li>
+        {takedosage && (
+          <>
+            <li>
+              Prescription Number: <Link to={`/prescriptions/${takedosage.attributes.prescription_id}`}>{takedosage.attributes.prescription_id}</Link>
+            </li>
+            <li>
+              Date Taken: {takedosage.attributes.datetaken}
+            </li>
+          </>
+        )}
+      </ul>
     </div>
-  )
+  );
 }
 
-export default Takedosage
+export default Takedosage;

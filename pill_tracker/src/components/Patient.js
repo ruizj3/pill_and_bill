@@ -18,7 +18,9 @@ const Patient = (props) => {
         <li key={prescription.id}>
           <Link to={`/prescriptions/prescriptions/${prescription.id}`}>{prescription.id}</Link>
         </li> ) : null}<br/>
+      <li className='navbar-menu'>
       <Link to={{pathname:`/prescriptions/prescriptions/new`, state: { patient_id: patient ? patient.id : null }}} > Add Prescription</Link>
+      </li>
     </div>
   );
 };

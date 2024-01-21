@@ -6,13 +6,11 @@ import { fetchPatients } from '../actions/fetchPatients';
 import CustomDropdown from './CustomDropdown';
 
 const PatientInput = ({ doctors })  => {
-  const firstDoctor = doctors[0]//.filter(docter => docter.id === 1)
-  console.log("first doctor", firstDoctor)
   const [state, setState] = useState({
     username: '',
     dob: '',
     password: '',
-    doctor_id: firstDoctor.id
+    doctor_id: ''
   });
 
   const dispatch = useDispatch();

@@ -1,10 +1,7 @@
 export function fetchTakedosages() {
-  return (dispatch) => {
-    fetch('http://localhost:3000/takedosages')
-    .then(resp => resp.json())
-    .then(takedosages => dispatch({
-      type: 'FETCH_TAKEDOSAGES',
-      payload: takedosages.data
-    }))
+  return async (dispatch) => {
+    const response = await fetch('http://localhost:3000/takedosages')
+    const allTakedosages = await response.json()
+    await dispatch({type: 'FETCH_TAKEDOSAGES',payload: allTakedosages.data})
   }
 }

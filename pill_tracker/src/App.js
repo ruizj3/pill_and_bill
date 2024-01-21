@@ -1,41 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 
-import PatientsContainer from './containers/PatientsContainer'
-import PrescriptionsContainer from './containers/PrescriptionsContainer'
-import TakedosagesContainer from './containers/TakedosagesContainer'
-import MedicationsContainer from './containers/MedicationsContainer'
+import PatientsContainer from './containers/PatientsContainer';
+import PrescriptionsContainer from './containers/PrescriptionsContainer';
+import TakedosagesContainer from './containers/TakedosagesContainer';
+import MedicationsContainer from './containers/MedicationsContainer';
+import DoctorsContainer from './containers/DoctorsContainer';
 
-import {Route, Routes} from 'react-router-dom'
-import Home from './components/Home'
-import Doctors from './components/Doctors'
+import { Route, Routes } from 'react-router-dom';
+import Home from './components/Home';
 
+const App = () => {
+  useEffect(() => {
+    console.log('App component mounted');
+  }, []);
 
-class App extends React.Component {
-  componentDidMount() {
-    console.log('Current props:', this.props);
-    console.log('Current state:', this.state);
-  }
-  render() {
-
-    return (
-      
-      <div className="App">
-
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/home' element={<Home />} />
-            <Route path='/patients/*' element={<PatientsContainer />}/>
-            <Route path='/prescriptions/*' element={<PrescriptionsContainer />}/>
-            <Route path='/takedosages/*' element={<TakedosagesContainer />}/>
-            <Route path='/medications/*' element={<MedicationsContainer />}/>
-            <Route path='/doctors/*' element={<Doctors />}/>
-          </Routes>
-
-      </div>
-    );
-  }
-}
-
+  return (
+    <div className="App">
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/patients/*' element={<PatientsContainer />} />
+        <Route path='/prescriptions/*' element={<PrescriptionsContainer />} />
+        <Route path='/takedosages/*' element={<TakedosagesContainer />} />
+        <Route path='/medications/*' element={<MedicationsContainer />} />
+        <Route path='/doctors/*' element={<DoctorsContainer />} />
+      </Routes>
+    </div>
+  );
+};
 
 export default App;

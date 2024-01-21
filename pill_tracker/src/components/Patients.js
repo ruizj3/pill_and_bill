@@ -14,15 +14,16 @@ const Patients = ({ patients }) => {
   );
 
   return (
-    <div>
+    <div className="patients-list">
       <Counter />
-      <label>Search Patient Name: </label>
       <input name="username" value={username} onChange={handleChange} />
-
       {searchPatients.map(patient => (
-        <li key={patient.id}>
-          <Link to={`/patients/patients/${patient.id}`}>{patient.attributes.username}</Link>
-        </li>
+        <Link to={`/patients/patients/${patient.id}`} key={patient.id} className="patient-box">
+          {console.log(patient)}
+          <div>
+            <li>{patient.attributes.username}</li>
+          </div>
+        </Link>
       ))}
     </div>
   );

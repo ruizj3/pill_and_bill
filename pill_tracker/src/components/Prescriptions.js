@@ -16,9 +16,10 @@ const Prescriptions = ({ prescriptions }) => {
             Dosages Per: {prescription.attributes.dosagesper} -
             Dosages Remaining: {prescription.attributes.dosagestotal} -
             <Link to={{
-              pathname: `/takedosages/new`,
-              state: { prescription_id: prescription.id, datetaken: today.toJSON().slice(0, 10) }
-            }}>
+              pathname: `/takedosages/takedosages/new`,
+              //old method here -> stateData: { prescription_id: prescription.id, datetaken: today.toJSON().slice(0, 10) }
+            }} state = {{ prescription_id: prescription.id, datetaken: today.toJSON().slice(0, 10) }}>
+
               Take Dosage
             </Link>
           </li>

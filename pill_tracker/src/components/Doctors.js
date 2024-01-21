@@ -1,28 +1,18 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {fetchDoctors} from '../actions/fetchDoctors'
+import React from 'react';
 
-class Doctors extends React.Component {
-
-
-  componentDidMount() {
-    Promise.all([
-    this.props.fetchDoctors()])
-  }
-
-
-  render() {
-
-      return (
-        <div>
-        </div>)
-  }
+const Doctors = ({ doctors }) => {
+  console.log(doctors)
+  return (
+    <div>
+      <ul>
+        {doctors.map(doctor => (
+          <li key={doctor.id}>
+            Doctor Name: - {doctor.attributes.username}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
 
-const mapStateToProps = state => {
-  return {
-    doctors: state.doctorReducer.doctors,
-  }
-}
-
-export default connect(mapStateToProps, {fetchDoctors})(Doctors)
+export default Doctors;

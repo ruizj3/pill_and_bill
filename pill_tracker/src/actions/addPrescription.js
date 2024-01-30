@@ -1,7 +1,8 @@
 export const addPrescription = (data) => {
 
   return async (dispatch) => {
-    const response = await fetch('http://localhost:3000/prescriptions', {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL
+    const response = await fetch(`${apiUrl}/prescriptions`, {
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'

@@ -1,6 +1,7 @@
 export const deleteMedication = (medication_id) => {
   return async (dispatch) => {
-    const response = await fetch(`http://localhost:3000/medications/${medication_id}`, {
+    const apiUrl = process.env.REACT_APP_API_BASE_URL
+    const response = await fetch(`${apiUrl}/medications/${medication_id}`, {
       method: 'DELETE'
     })
     const deletedMedication = await response.json()

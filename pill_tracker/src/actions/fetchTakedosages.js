@@ -1,6 +1,7 @@
 export function fetchTakedosages() {
   return async (dispatch) => {
-    const response = await fetch('http://localhost:3000/takedosages')
+    const apiUrl = process.env.REACT_APP_API_BASE_URL
+    const response = await fetch(`${apiUrl}/takedosages`)
     const allTakedosages = await response.json()
     await dispatch({type: 'FETCH_TAKEDOSAGES',payload: allTakedosages.data})
   }

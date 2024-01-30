@@ -3,4 +3,4 @@ Basic Medication Tracker frontend data handling and viewing for Doctors monitori
 
 Run `npm install` and `npm start` to start.
 
-With backend already up and running, this should go to `http://localhost:3001` upon being prompted and selecting Y for another port..
+With backend already up and running, this should go to `http://localhost:3001` upon being prompted and selecting Y for another port...

@@ -34,7 +34,7 @@ const root = createRoot(container); // Create a root
 // Use the root to render the App
 root.render(
   <Provider store={store}>
-    <Router>
+    <Router basename="/pill_and_bill">
       <NavBar/>
       <App />
       (R)Pill and Bill

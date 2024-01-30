@@ -1,6 +1,4 @@
 name: Deploy to GitHub Pages
-permissions:
-  contents: write
 
 on:
   pull_request:
@@ -9,6 +7,9 @@ on:
   push:
     branches:
       - main
+
+permissions:
+  contents: write
 
 jobs:
   deploy:

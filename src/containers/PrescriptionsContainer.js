@@ -12,14 +12,11 @@ import TakedosageInput from '../components/TakedosageInput';
 function PrescriptionsContainer() {
   const dispatch = useDispatch();
   const prescriptions = useSelector(state => state.prescriptionsRed.prescriptions);
-  const patients = useSelector(state => state.patientsRed.patients);
-  const medications = useSelector(state => state.medicationsRed.medications);
 
   useEffect(() => {
     dispatch(fetchPrescriptions());
     dispatch(fetchPatients());
     dispatch(fetchMedications());
-    console.log("Fetched prescripions data:", prescriptions);
   }, [dispatch]);
 
   return (
